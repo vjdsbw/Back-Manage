@@ -2,6 +2,7 @@
 backend/node_modules
 backend/public/pro-img
 admin-master/mock
+admin-master/public
 admin-master/node_modules
 .DS_Store
 dist
