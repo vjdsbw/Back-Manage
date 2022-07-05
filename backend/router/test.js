@@ -6,8 +6,8 @@ const multer = require("multer")
 const storage = multer.diskStorage({
   // 存储位置
   destination(req, file, callback) {
-    // 参数一 错误信息   参数二  上传路径（此处指定upload文件夹）
-    callback(null, "upload")
+    // 参数一 错误信息   参数二  上传路径（此处指定public文件夹）
+    callback(null, "public")
   },
   // 确定文件名
   filename(req, file, cb) {

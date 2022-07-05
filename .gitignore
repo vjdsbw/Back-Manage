@@ -1,6 +1,6 @@
 .DS_Store
 backend/node_modules
-backend/public/pro-img
+backend/public
 admin-master/mock
 admin-master/public
 admin-master/node_modules

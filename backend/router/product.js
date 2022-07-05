@@ -2,7 +2,23 @@ const express = require("express");
 const Product = require("../model/product");
 const path = require("path");
 const mongoose = require("mongoose");
+const multer = require("multer")
 const router = express.Router();
+
+// 指定存储位置
+const storage = multer.diskStorage({
+  // 存储位置
+  destination(req, file, callback) {
+    // 参数一 错误信息   参数二  上传路径（此处指定public文件夹）
+    callback(null, "public/pro-img")
+  },
+  // 确定文件名
+  filename(req, file, cb) {
+    cb(null, Date.now() + file.originalname)
+  }
+})
+// 得到multer对象  传入storage对象
+const upload = multer({ storage })
 
 router.get("/product", async (req, res) => {
   const { pageindex = 1 } = req.query;
@@ -51,7 +67,6 @@ router.get("/product", async (req, res) => {
     });
   }
 });
-
 
 router.get("/product2", async (req, res) => {
   var images = await Product.find({ id: req.query.id });

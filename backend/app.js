@@ -50,8 +50,8 @@ app.use("/public",express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use("/product",product)
-app.use("/news",news)
+app.use(product)
+app.use(news)
 app.use(login)
 app.use(menu)
 app.use(test)
@@ -59,8 +59,6 @@ app.use(test)
 
 app.use(function (err, req, res, next) {
     if (err.status == 401) {
-        // return res.status(401).send('token失效')
-        //可以设置返回json 形式  
         res.json({ status: 401, message: 'token失效' })
     }
 })
@@ -69,3 +67,5 @@ app.use(function (err, req, res, next) {
 app.listen(port, () => {
     console.log(`listening at http://localhost:${port}`);
 })
+
+
