@@ -8,7 +8,7 @@ const login = require("./router/login")
 const menu = require("./router/menu")
 const test = require("./router/test")
 const app=express();
-const port=3000;
+const port=3001;
 
 const vertoken = require('./router/token')
 const expressJwt = require('express-jwt').expressjwt

@@ -1,7 +1,6 @@
 const express = require("express");
 const Product = require("../model/product");
 const path = require("path");
-const mongoose = require("mongoose");
 const multer = require("multer")
 const router = express.Router();
 
@@ -20,63 +19,93 @@ const storage = multer.diskStorage({
 // 得到multer对象  传入storage对象
 const upload = multer({ storage })
 
-router.get("/product", async (req, res) => {
-  const { pageindex = 1 } = req.query;
-  var limit = 9;
-  //如果a标签返回的值有page
-  if (req.query.page) {
-    var skip = (pageindex - 1) * limit;
-    let result = await Product.find({ page: req.query.page }).skip(skip).limit(limit);
-    let result2 = await Product.aggregate([
-      {
-        $group: {
-          _id: '$page',
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-    var page1 = req.query.page;
-    // 根据page的不同类计算总页数
-    switch (req.query.page) {
-      case 'sh': totalPage = Math.ceil(result2[2].count / limit); break;
-      case 'yy': totalPage = Math.ceil(result2[1].count / limit); break;
-      case 'cl': totalPage = Math.ceil(result2[0].count / limit); break;
-    }
-    //console.log(totalPage);
+
+router.post("/getallproduct", async (req, res) => {
+  let { current, size } = req.body;
+  let result = await Product.find()
+  let total = result.length
+  const newresult = result.slice((current - 1) * size, (current * size))
+  res.json({
+    code: 200,
+    message: '获取菜单成功',
+    data: newresult,
+    total: total
+  })
+
+})
+
+router.get("/delproduct", async (req, res) => {
+  let result = await Product.deleteOne({ id: req.query.id })
+  res.json({
+    code: 200,
+    message: '获取菜单成功',
+    data: result + '删除成功'
+  })
+
+})
+
+//新增产品
+router.post("/addproduct",async(req,res)=>{
+    let product = new Product();
+    Object.assign(product,req.body);
+    product.save();
     res.json({
-      products: result,
-      totalPage: totalPage,
-      page1
-    });
+      msg:"新增成功",
+      code:200
+    })
+
+})
+
+
+router.get("/getproductdetail", async (req, res) => {
+  let result = await Product.find({ id: req.query.id });
+  if (result.length > 0) {
+    res.json({
+      data: result,
+      code: 200,
+      msg: "查找成功"
+    })
   }
   else {
-    var skip = (pageindex - 1) * limit;
-    let result = await Product.find().skip(skip).limit(limit);
-    let result2 = await Product.aggregate([
-      {
-        $group: {
-          _id: null,
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-    var totalPage = Math.ceil(result2[0].count / limit);
     res.json({
-      products: result,
-      totalPage: totalPage,
-    });
+      data: result,
+      code: 2000,
+      msg: "查找失败"
+    })
   }
-});
+})
 
-router.get("/product2", async (req, res) => {
-  var images = await Product.find({ id: req.query.id });
-  var imagesp = await Product.find({ id: req.query.id - 1 });
-  // 因为req.query获得的返回值是字符串，直接加就变成了字符串拼接，这里减负值就会强制转换为number
-  var imagesa = await Product.find({ id: req.query.id - (-1) });
-  var image = images[0];
-  var imagep = imagesp[0];
-  var imagea = imagesa[0];
-  res.json({ image, imagep, imagea });
-});
+//更新产品
+router.post("/updateproduct", async (req, res) => {
+  let { id,CName, EName, Cas, content, molecularFormula, molecularWeight, img, page } = req.body;
+  Product.findOneAndUpdate({ id: id }, {
+    $set: {
+      CName: CName,
+      EName: EName,
+      Cas: Cas,
+      content: content,
+      molecularFormula: molecularFormula,
+      molecularWeight: molecularWeight,
+      page: page,
+      img: img
+    }
+  }, (err, data) => {
+    if (err) {
+      res.json({
+        code: 2000,
+        msg: "更新失败" + err
+      })
+    }
+  })
+  res.json({
+    code: 200,
+    msag: "更新成功"
+  })
+})
+
+router.post("/uploadPro/upImg",upload.single("file"),(req,res)=>{
+  const url = "http://localhost:3000/public/pro-img/" + req.file.filename
+  res.json({ url })
+})
 
 module.exports = router;

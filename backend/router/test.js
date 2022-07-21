@@ -49,4 +49,5 @@ router.post("/upload/upImg",upload.single("file"),(req,res)=>{
   res.json({ url })
 })
 
+
 module.exports = router
