@@ -56,15 +56,15 @@
           <el-option label="材料化学" value="cl"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="img">
+      <el-form-item label="上传图片" prop="img">
         <div class="img">
-          <el-upload
+          <el-upload   
             class="avatar-uploader"
-            action="/api/upload/upImg"
+            action="/api/uploadPro/upImg"
             :show-file-list="false"
             :http-request="upload"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="imageUrl" :src="`http://localhost:3001/public/pro-img/${imageUrl}`" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon">
               +
             </el-icon>
@@ -94,7 +94,7 @@ import {
   ref,
   computed,
 } from 'vue'
-import {AddProduct,UploadImage } from '@/api/product'
+import { AddProduct, UploadImage } from '@/api/product'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
@@ -128,7 +128,7 @@ export default defineComponent({
         state.ProductForm.validate(async valid => {
           if (valid) {
             state.loading = true
-            state.model.id = Math.floor(Math.random() * 100) + '1';
+            state.model.id = Math.floor(Math.random() * 100) + '1'
             console.log(state.model)
             const result = await AddProduct(state.model)
             if (result.code == 200) {
@@ -181,12 +181,14 @@ export default defineComponent({
       let result = await UploadImage(fromData)
       imageUrl.value = result.url
       state.model.img = imageUrl.value
-      console.log(state.model.img,"1111111111111111");
     }
 
     return {
       ...toRefs(state),
-      imageUrl, handleAvatarSuccess, beforeAvatarUpload, upload
+      imageUrl,
+      handleAvatarSuccess,
+      beforeAvatarUpload,
+      upload,
     }
   },
 })
@@ -205,6 +207,29 @@ export default defineComponent({
       height: 178px;
       display: block;
     }
+    .avatar-uploader .el-upload {
+      border: 1px dashed var(--el-border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--el-transition-duration-fast);
+    }
+
+    .avatar-uploader .el-upload:hover {
+      border-color: var(--el-color-primary);
+    }
+
+    .el-icon.avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 178px;
+      height: 178px;
+      text-align: center;
+    }
   }
+}
+.name{
+  background-image: url(http://localhost:3001/public/pro-img/165841655198116566472665222.jpg);
 }
 </style>

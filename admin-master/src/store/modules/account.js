@@ -16,6 +16,7 @@ export default {
   state: {
     userinfo: null,
     permissionList: [],
+    user: {}
   },
   mutations: {
     // 保存用户信息
@@ -25,6 +26,13 @@ export default {
     // 清除用户信息
     clearUserinfo(state) {
       state.userinfo = null
+    },
+
+    setUser(state, data) {     
+      state.user = data
+    },
+    clearUser(state) {
+      state.user = {}
     },
   },
   actions: {

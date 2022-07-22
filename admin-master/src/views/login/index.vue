@@ -43,6 +43,7 @@
         </el-button>
       </el-form-item>
     </el-form>
+     <div class="wb"><span>没有账号？</span>  <router-link to="/registered">去注册</router-link></div>
   </div>
 </template>
 
@@ -96,6 +97,7 @@ export default defineComponent({
           if (valid) {
             state.loading = true
             const { code, data, message } = await Login(state.model)
+            store.commit('account/setUser', data.user)
             if (+code === 200) {
               ctx.$message.success({
                 message: '登录成功',
@@ -137,6 +139,12 @@ export default defineComponent({
   height: 100%;
   overflow: hidden;
   background: #2d3a4b;
+  .wb{
+    color:white;
+     display: flex;
+    justify-content: center;
+     align-items: center;
+  }
   .form {
     width: 520px;
     max-width: 100%;

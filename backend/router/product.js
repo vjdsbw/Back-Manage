@@ -104,7 +104,7 @@ router.post("/updateproduct", async (req, res) => {
 })
 
 router.post("/uploadPro/upImg",upload.single("file"),(req,res)=>{
-  const url = "http://localhost:3000/public/pro-img/" + req.file.filename
+  const url = req.file.filename
   res.json({ url })
 })
 
