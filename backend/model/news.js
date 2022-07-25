@@ -15,6 +15,12 @@ content: {
 },
 num:{
     type:String
+},
+img:{
+    type:String 
+},
+type:{
+    type:String  
 }
 })
 

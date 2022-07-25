@@ -8,7 +8,7 @@ const login = require("./router/login")
 const menu = require("./router/menu")
 const test = require("./router/test")
 const app=express();
-const port=3000;
+const port=3001;
 
 const vertoken = require('./router/token')
 const expressJwt = require('express-jwt').expressjwt
@@ -50,8 +50,8 @@ app.use("/public",express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use("/product",product)
-app.use("/news",news)
+app.use(product)
+app.use(news)
 app.use(login)
 app.use(menu)
 app.use(test)
