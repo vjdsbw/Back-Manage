@@ -1,6 +1,8 @@
 import request from '@/utils/request'
 
+
 // 获取新闻信息
+
 export function getNews(id) {
   return request({
     url: '/api/snews',
@@ -17,6 +19,7 @@ export function createNews(data) {
     data,
   })
 }
+
 
 // 删除新闻信息
 export function deleteNews(num) {
