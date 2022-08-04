@@ -1,12 +1,13 @@
 const Layout = () => import('@/layout/index.vue')
-
 export default [
   {
     path: '/news',
     component: Layout,
     redirect: '/news/index',
     name: 'news',
-    meta: { title: '新闻模块' },
+    meta: {
+      title: '新闻模块',
+    },
     icon: 'user',
     children: [
       {
@@ -23,12 +24,14 @@ export default [
         meta: { title: '新增新闻' },
         icon: 'form',
       },
+
       {
         path: 'exit/:num?',
         component: () => import('@/views/news/exit.vue'),
         name: 'exitnews',
         hidden: true,
       },
+
     ],
   },
 ]

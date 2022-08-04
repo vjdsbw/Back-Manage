@@ -1,5 +1,19 @@
 <template>
   <div class="container">
+
+    <div class="findnew">
+      <el-input
+        class="find"
+        v-model="keywords"
+        placeholder="请输入查询内容"
+        size="small"
+        clearable="true"
+      />
+      <el-button id="findbtn" type="primary" size="mini" @click="findNews">
+        查询
+      </el-button>
+    </div>
+
     <el-table :data="Lists" stripe style="width: 100%">
       <el-table-column
         align="center"
@@ -40,6 +54,7 @@
         <template #default="scope">
           <el-button
             size="mini"
+
             type="primary"
             @click="$router.push(`/news/exit/${scope.row.num}`)"
           >
@@ -65,15 +80,19 @@
 </template>
 
 <script>
+
 import { ref } from 'vue'
+
 import { getNews, deleteNews } from '@/api/news'
 import { ElMessage } from 'element-plus'
 export default {
   setup() {
+
     const Lists = ref([])
     const getList = async () => {
       let result = await getNews()
       result.code == 200 ? (Lists.value = result.data) : ''
+
     }
     getList()
 
@@ -87,8 +106,8 @@ export default {
         window.location.reload()
       })
     }
-
     return { Lists, handleDelete }
   },
 }
 </script>
+

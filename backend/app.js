@@ -7,6 +7,8 @@ const news = require("./router/news")
 const login = require("./router/login")
 const menu = require("./router/menu")
 const test = require("./router/test")
+const contact = require("./router/contact")
+const registered = require("./router/registered")
 const app=express();
 const port=3001;
 
@@ -26,8 +28,8 @@ app.use(expressJwt({
     secret: 'hello_token',
     algorithms: ['HS256']
 }).unless({
-    //用户第一次登录的时候不需要验证token
-    path: ['/login']  //不需要验证的接口名称
+    //用户第一次登录的时候不需要验证token  [path.resolve(__dirname, 'src/assets/svg')]
+    path: ['/login',{url:/^\/public\/.*/,methods:['GET']}]  //不需要验证的接口名称
 }))
 
 app.use(function (req, res, next) {
@@ -55,12 +57,12 @@ app.use(news)
 app.use(login)
 app.use(menu)
 app.use(test)
+app.use(registered)
+app.use(contact)
 
 
 app.use(function (err, req, res, next) {
     if (err.status == 401) {
-        // return res.status(401).send('token失效')
-        //可以设置返回json 形式  
         res.json({ status: 401, message: 'token失效' })
     }
 })
@@ -69,3 +71,6 @@ app.use(function (err, req, res, next) {
 app.listen(port, () => {
     console.log(`listening at http://localhost:${port}`);
 })
+
+
+
