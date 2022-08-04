@@ -21,7 +21,7 @@ export const UpdateProduct = data => {
 //获取产品详情
 export const GetProductDetail = data => {
   return request({
-    url: `/api/getproductdetail?CName=${data.CName}`,
+    url: `/api/getproductdetail?id=${data.id}`,
     method: 'get',
   })
 }

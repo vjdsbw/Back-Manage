@@ -65,6 +65,7 @@ export default defineComponent({
     const onSubmit = () => {}
     const get = async () => {
       let result = await GetContact()
+      console.log(result)
       if (result.code == 200) {
         state.userName = store.state.account.user.name
         state.email = store.state.account.user.email
