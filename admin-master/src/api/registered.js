@@ -1,4 +1,3 @@
-
 import request from '@/utils/request'
 
 //注册接口

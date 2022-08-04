@@ -9,7 +9,7 @@ export const Login = data => {
   })
 }
 
-// 获取登录用户信息 
+// 获取登录用户信息
 export const GetUserinfo = () => {
   return request({
     url: '/api/userinfo',
@@ -17,13 +17,9 @@ export const GetUserinfo = () => {
   })
 }
 
-
 export const GetContact = () => {
   return request({
     url: '/api/GetContact',
     method: 'get',
   })
 }
-
-
-

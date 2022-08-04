@@ -43,7 +43,10 @@
         </el-button>
       </el-form-item>
     </el-form>
-     <div class="wb"><span>没有账号？</span>  <router-link to="/registered">去注册</router-link></div>
+    <div class="wb">
+      <span>没有账号？</span>
+      <router-link to="/registered">去注册</router-link>
+    </div>
   </div>
 </template>
 
@@ -139,11 +142,11 @@ export default defineComponent({
   height: 100%;
   overflow: hidden;
   background: #2d3a4b;
-  .wb{
-    color:white;
-     display: flex;
+  .wb {
+    color: white;
+    display: flex;
     justify-content: center;
-     align-items: center;
+    align-items: center;
   }
   .form {
     width: 520px;

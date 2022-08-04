@@ -15,7 +15,7 @@ const Registered = () => import('@/views/registered/index.vue')
 export default [
   {
     path: '/registered',
-    name: 'registered', 
+    name: 'registered',
     component: Registered,
   },
 ]

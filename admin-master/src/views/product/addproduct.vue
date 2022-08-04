@@ -58,13 +58,17 @@
       </el-form-item>
       <el-form-item label="上传图片" prop="img">
         <div class="img">
-          <el-upload   
+          <el-upload
             class="avatar-uploader"
             action="/api/uploadPro/upImg"
             :show-file-list="false"
             :http-request="upload"
           >
-            <img v-if="imageUrl" :src="`http://localhost:3001/public/pro-img/${imageUrl}`" class="avatar" />
+            <img
+              v-if="imageUrl"
+              :src="`http://localhost:3001/public/pro-img/${imageUrl}`"
+              class="avatar"
+            />
             <el-icon v-else class="avatar-uploader-icon">
               +
             </el-icon>
@@ -229,7 +233,7 @@ export default defineComponent({
     }
   }
 }
-.name{
+.name {
   background-image: url(http://localhost:3001/public/pro-img/165841655198116566472665222.jpg);
 }
 </style>

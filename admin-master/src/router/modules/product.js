@@ -36,7 +36,7 @@ export default [
         meta: {
           title: '产品详情',
         },
-        hidden:true
+        hidden: true,
       },
     ],
   },

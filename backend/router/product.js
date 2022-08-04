@@ -1,3 +1,4 @@
+
 const express = require("express");
 const Product = require("../model/product");
 const path = require("path");
@@ -60,6 +61,7 @@ router.post("/addproduct",async(req,res)=>{
 router.get("/getproductdetail", async (req, res) => {
   
   let result = await Product.find({ id: req.query.id });
+  console.log(result,req.query.id);
   if (result.length > 0) {
     res.json({
       data: result,
@@ -110,3 +112,4 @@ router.post("/uploadPro/upImg",upload.single("file"),(req,res)=>{
 })
 
 module.exports = router;
+

@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const newsSchema = new  mongoose.Schema({
@@ -26,5 +27,6 @@ type:{
 })
 
 const News = mongoose.model("news",newsSchema,"news");
+
 
 module.exports = News;

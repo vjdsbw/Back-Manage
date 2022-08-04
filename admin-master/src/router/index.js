@@ -13,7 +13,7 @@ import registered from './modules/registered'
 
 /* 菜单栏的路由 */
 // 固定菜单
-export const fixedRoutes = [...home,...product, ...news]
+export const fixedRoutes = [...home, ...product, ...news]
 
 // 动态菜单
 export const asyncRoutes = [...test]

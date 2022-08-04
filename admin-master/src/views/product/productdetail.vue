@@ -68,9 +68,9 @@
         <el-button
           type="primary"
           class="btn"
-         @click="$router.push('/product/addproduct')"
+          @click="$router.push('/product/addproduct')"
         >
-         新增
+          新增
         </el-button>
       </el-form-item>
     </el-form>
@@ -107,7 +107,7 @@ export default defineComponent({
         molecularWeight: '',
         img: '',
         page: '',
-        id:'',
+        id: '',
       },
       loading: false,
       btnText: computed(() => (state.loading ? '更新...' : '更新')),
@@ -173,8 +173,8 @@ export default defineComponent({
 .productdetail {
   color: $mainColor;
   width: 800px;
-  .form{
-    .img{
+  .form {
+    .img {
       width: 100px;
       height: 100px;
     }
