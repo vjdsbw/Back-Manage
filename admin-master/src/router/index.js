@@ -7,6 +7,7 @@ import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
 import news from './modules/news'
+
 import product from './modules/product'
 import registered from './modules/registered'
 

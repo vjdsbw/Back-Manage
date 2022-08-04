@@ -24,6 +24,14 @@ export default [
         meta: { title: '新增新闻' },
         icon: 'form',
       },
+
+      {
+        path: 'exit/:num?',
+        component: () => import('@/views/news/exit.vue'),
+        name: 'exitnews',
+        hidden: true,
+      },
+
     ],
   },
 ]

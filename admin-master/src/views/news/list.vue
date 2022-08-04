@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+
     <div class="findnew">
       <el-input
         class="find"
@@ -12,6 +13,7 @@
         查询
       </el-button>
     </div>
+
     <el-table :data="Lists" stripe style="width: 100%">
       <el-table-column
         align="center"
@@ -52,17 +54,14 @@
         <template #default="scope">
           <el-button
             size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-          >
-            Delete
-          </el-button>
-          <el-button
-            size="mini"
+
             type="primary"
-            @click="handleEdit(scope.$index, scope.row)"
+            @click="$router.push(`/news/exit/${scope.row.num}`)"
           >
             edit
+          </el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)">
+            Delete
           </el-button>
         </template>
       </el-table-column>
@@ -81,16 +80,19 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+
+import { ref } from 'vue'
+
 import { getNews, deleteNews } from '@/api/news'
 import { ElMessage } from 'element-plus'
 export default {
   setup() {
-    const keywords = ref('')
+
     const Lists = ref([])
     const getList = async () => {
       let result = await getNews()
-      Lists.value = result.mesa
+      result.code == 200 ? (Lists.value = result.data) : ''
+
     }
     getList()
 
@@ -104,22 +106,8 @@ export default {
         window.location.reload()
       })
     }
-
-    //  查找
-    const findNews = () => {
-      const value = keywords.value
-      const newLists = Lists.value.filter(item => item.title.includes(value))
-      Lists.value = newLists
-      window.location.reload()
-    }
-
-    return { Lists, handleDelete, keywords, findNews }
+    return { Lists, handleDelete }
   },
 }
 </script>
 
-<style scoped land="less">
-.find {
-  width: 230px;
-}
-</style>
