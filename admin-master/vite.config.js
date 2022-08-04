@@ -53,9 +53,9 @@ export default env => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
-      viteESLint({
-        include: ['src/**/*.vue', 'src/**/*.js'],
-      }),
+      // viteESLint({
+      //   include: ['src/**/*.vue', 'src/**/*.js'],
+      // }),
     ],
     css: {
       preprocessorOptions: {
@@ -74,7 +74,7 @@ export default env => {
       open: true,
       proxy: {
         '/api': {
-          target: 'http://localhost:3000', // 后端接口的域名
+          target: 'http://localhost:3001', // 后端接口的域名
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
         },
