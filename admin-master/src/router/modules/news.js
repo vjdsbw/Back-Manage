@@ -8,7 +8,7 @@ export default [
     meta: {
       title: '新闻模块',
     },
-    icon: 'user',
+    icon: 'el-icon-bangzhu',
     children: [
       {
         path: 'list',
