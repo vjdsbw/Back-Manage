@@ -7,10 +7,13 @@ import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
 import news from './modules/news'
+import product from './modules/product'
+import registered from './modules/registered'
 
 /* 菜单栏的路由 */
 // 固定菜单
-export const fixedRoutes = [...home, ...news]
+export const fixedRoutes = [...home,...product, ...news]
+
 // 动态菜单
 export const asyncRoutes = [...test]
 
@@ -26,6 +29,7 @@ const router = createRouter({
     ...lock,
     ...fixedRoutes,
     ...error,
+    ...registered,
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

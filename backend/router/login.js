@@ -1,16 +1,19 @@
 const express = require("express");
-const vertoken = require('./token')
+const vertoken = require('./token');
+const User = require("../model/user");
 const router = express.Router();
 
-router.post("/login",(req,res)=>{
+router.post("/login",async (req,res)=>{
   const { userName, password } = req.body;
-  if (userName == "admin" && password == "123456" || userName == "visitor" && password == "123456") {
+  let result = await User.find({ name: userName })
+  if (userName == result[0].name && password == result[0].password) {
     vertoken.setToken(userName, password).then(token => {
       res.end(JSON.stringify({
         code: 200,
         message: '登录成功',
         data: {
-          token: token
+          token: token,
+          user:result[0]
         }
       }))
     })

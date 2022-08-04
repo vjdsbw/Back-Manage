@@ -16,7 +16,7 @@ const productSchema = mongoose.Schema({
         type: String
     },
     content: {
-        type: Number
+        type: String
     },
     page: {
         type: String

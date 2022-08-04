@@ -2,9 +2,8 @@ const express = require("express");
 const News = require("../model/news")
 const path = require("path")
 const mongoose = require("mongoose")
+const multer = require("multer")
 const router = express.Router();
-
-
 router.get("/snews", async (req, res) => {
    var id = req.query.id;
    let mesa = await News.find();
@@ -58,6 +57,7 @@ router.post("/snews/exit",async(req,res) => {
             content:content,
             title:title,
             type:type,
+
         }
     },(err,data) => {
         if(err){

@@ -9,10 +9,21 @@ export const Login = data => {
   })
 }
 
-// 获取登录用户信息
+// 获取登录用户信息 
 export const GetUserinfo = () => {
   return request({
     url: '/api/userinfo',
     method: 'get',
   })
 }
+
+
+export const GetContact = () => {
+  return request({
+    url: '/api/GetContact',
+    method: 'get',
+  })
+}
+
+
+
