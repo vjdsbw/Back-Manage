@@ -1,3 +1,4 @@
+
 {
   "name": "vue3-element-admin",
   "version": "2.1.0",
@@ -21,6 +22,7 @@
   ],
   "dependencies": {
     "axios": "^0.21.1",
+    "echarts": "^5.3.3",
     "vue": "^3.0.5",
     "vue-router": "^4.0.5",
     "vuex": "^4.0.0"
@@ -52,6 +54,11 @@
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huzhushan/vue3-element-admin.git"
@@ -62,3 +69,4 @@
   },
   "homepage": "https://github.com/huzhushan/vue3-element-admin"
 }
+

@@ -6,10 +6,14 @@ import login from './modules/login'
 import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
+import news from './modules/news'
 import product from './modules/product'
+import registered from './modules/registered'
+
 /* 菜单栏的路由 */
 // 固定菜单
-export const fixedRoutes = [...home,...product]
+export const fixedRoutes = [...home, ...product, ...news]
+
 // 动态菜单
 export const asyncRoutes = [...test]
 
@@ -17,7 +21,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
-      path: '/login',
+      path: '/',
       redirect: '/home',
     },
     ...redirect, // 统一的重定向配置
@@ -25,6 +29,7 @@ const router = createRouter({
     ...lock,
     ...fixedRoutes,
     ...error,
+    ...registered,
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

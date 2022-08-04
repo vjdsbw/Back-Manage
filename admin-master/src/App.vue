@@ -1,5 +1,3 @@
-
-
 <template>
   <el-config-provider :locale="locale">
     <router-view />
