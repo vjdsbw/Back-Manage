@@ -7,7 +7,7 @@ export default [
     redirect: '/news/index',
     name: 'news',
     meta: { title: '新闻模块' },
-    icon: 'user',
+    icon: 'el-icon-document-copy',
     children: [
       {
         path: 'list',
