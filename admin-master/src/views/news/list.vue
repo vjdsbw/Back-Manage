@@ -1,0 +1,125 @@
+<template>
+  <div class="container">
+    <div class="findnew">
+      <el-input
+        class="find"
+        v-model="keywords"
+        placeholder="请输入查询内容"
+        size="small"
+        clearable="true"
+      />
+      <el-button id="findbtn" type="primary" size="mini" @click="findNews">
+        查询
+      </el-button>
+    </div>
+    <el-table :data="Lists" stripe style="width: 100%">
+      <el-table-column
+        align="center"
+        header-align="center"
+        prop="type"
+        label="类型"
+        width="80"
+      />
+      <el-table-column
+        align="center"
+        header-align="center"
+        prop="time"
+        label="发布时间"
+        width="130"
+      />
+      <el-table-column
+        align="center"
+        header-align="center"
+        prop="frequency"
+        label="点击次数"
+        width="100"
+      />
+      <el-table-column
+        align="center"
+        header-align="center"
+        prop="title"
+        width="220"
+        label="标题"
+      />
+      <el-table-column label="内容" width="580" :show-overflow-tooltip="true">
+        <template #default="scope">
+          <div style="display: flex; align-items: center">
+            <div class="ellipsis" v-html="scope.row.content"></div>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="180">
+        <template #default="scope">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+          >
+            Delete
+          </el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleEdit(scope.$index, scope.row)"
+          >
+            edit
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <!-- 分页 -->
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :page-size="size"
+      :current-page="current"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+</template>
+
+<script>
+import { ref, computed } from 'vue'
+import { getNews, deleteNews } from '@/api/news'
+import { ElMessage } from 'element-plus'
+export default {
+  setup() {
+    const keywords = ref('')
+    const Lists = ref([])
+    const getList = async () => {
+      let result = await getNews()
+      Lists.value = result.mesa
+    }
+    getList()
+
+    // 删除
+    const handleDelete = async row => {
+      deleteNews(row.num).then(response => {
+        ElMessage({
+          message: '删除成功',
+          type: 'success',
+        })
+        window.location.reload()
+      })
+    }
+
+    //  查找
+    const findNews = () => {
+      const value = keywords.value
+      const newLists = Lists.value.filter(item => item.title.includes(value))
+      Lists.value = newLists
+      window.location.reload()
+    }
+
+    return { Lists, handleDelete, keywords, findNews }
+  },
+}
+</script>
+
+<style scoped land="less">
+.find {
+  width: 230px;
+}
+</style>

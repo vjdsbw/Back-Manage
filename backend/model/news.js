@@ -16,10 +16,14 @@ content: {
 num:{
     type:String
 },
-type:{
-	type:String
+img:{
+    type:String 
 },
+type:{
+    type:String  
+}
 })
 
 const News = mongoose.model("news",newsSchema,"news");
+
 module.exports = News;
