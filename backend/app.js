@@ -8,7 +8,7 @@ const login = require("./router/login")
 const menu = require("./router/menu")
 const test = require("./router/test")
 const app=express();
-const port=3000;
+const port=3001;
 
 const vertoken = require('./router/token')
 const expressJwt = require('express-jwt').expressjwt
@@ -22,27 +22,27 @@ db.once('open', function () {
     console.log("已经连接数据库");
 });
 
-// app.use(expressJwt({
-//     secret: 'hello_token',
-//     algorithms: ['HS256']
-// }).unless({
-//     //用户第一次登录的时候不需要验证token
-//     path: ['/login']  //不需要验证的接口名称
-// }))
+app.use(expressJwt({
+    secret: 'hello_token',
+    algorithms: ['HS256']
+}).unless({
+    //用户第一次登录的时候不需要验证token
+    path: ['/login']  //不需要验证的接口名称
+}))
 
-// app.use(function (req, res, next) {
-//     var token = req.headers['authorization'];
-//     if (token == undefined) {
-//         return next();
-//     } else {
-//         vertoken.getToken(token).then((data) => {
-//             req.data = data;
-//             return next();
-//         }).catch((error) => {
-//             return next();
-//         })
-//     }
-// });
+app.use(function (req, res, next) {
+    var token = req.headers['authorization'];
+    if (token == undefined) {
+        return next();
+    } else {
+        vertoken.getToken(token).then((data) => {
+            req.data = data;
+            return next();
+        }).catch((error) => {
+            return next();
+        })
+    }
+});
 
 app.use("/node_modules",express.static(path.join(__dirname,"node_modules")));
 app.use("/public",express.static(path.join(__dirname,"public")));

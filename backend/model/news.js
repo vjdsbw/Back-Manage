@@ -16,9 +16,9 @@ content: {
 num:{
     type:String
 },
-type:{
-	type:String
-},
+// type:{
+// 	type:String
+// },
 })
 
 const News = mongoose.model("news",newsSchema,"news");
